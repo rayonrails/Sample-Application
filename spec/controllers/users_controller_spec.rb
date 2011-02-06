@@ -76,7 +76,7 @@ describe UsersController do
    describe "success" do
      
      before(:each) do
-       @attr = ({:name => "New User", :email => "user@example.com",
+       @attr = ({:name => "Ray Rogers", :email => "ray@rayonrails.com",
                  :password => "foobar", :password_confirmation => "foobar"})
      end
    
@@ -89,6 +89,11 @@ describe UsersController do
      it "should redirect to the user show page" do
        post :create, :user => @attr
        response.should redirect_to(user_path(assigns(:user)))
+     end
+     
+     it "should sign the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
      end
    
      it "should have a welcome message" do
